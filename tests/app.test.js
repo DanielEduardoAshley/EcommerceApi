@@ -14,7 +14,8 @@ test('expect {test:1}', done =>{
         return Promise.resolve()
     
     })
-     request(app)
+    console.log(app.use('/users', usersRouter))
+     request(app.use('/users', usersRouter))
         .get('/')
         .then((response)=>{
             console.log(response.status)

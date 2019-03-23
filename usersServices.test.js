@@ -6,6 +6,7 @@ test('returns promise', done=>{
 db.any.mockImplementation(()=>Promise.resolve())
 usersServices.read()
 .then((_)=>{
+    console.log(db.any.mock.calls)
         expect(db.any.mock.calls[0][0]).toBe('SELECT * FROM users WHERE id=${id}')
         done();
     })
