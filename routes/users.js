@@ -1,12 +1,13 @@
 const express = require('express');
 const usersRouter = express.Router();
 const router = express.Router();
-// const usersService = require('../services/users');
+const {usersServices} = require('../services/usersServices');
 
 //gets  buyer/seller 
-usersRouter.get('/', (req,res)=>{
+usersRouter.get('/:username', (req,res)=>{
     const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
-  return  usersServices.read(id)
+    const {username} = req.params;
+  return usersServices.read(username)
     .then((response)=>{
         res.status(204)
         res.json({response})
