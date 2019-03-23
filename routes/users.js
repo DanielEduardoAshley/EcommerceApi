@@ -1,12 +1,24 @@
 const express = require('express');
 const usersRouter = express.Router();
+const router = express.Router();
 // const usersService = require('../services/users');
 
-//creates new buyer/seller //Register
-usersRouter.post('/', (req,res)=>{
+//gets  buyer/seller 
+usersRouter.get('/', (req,res)=>{
     const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
-    res.send('users')
-
+  return  usersServices.read(id)
+    .then((response)=>{
+        res.status(204)
+        res.json({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send('information missing')
+    })
+        
+   
+       
+    
 
 
 })
@@ -20,16 +32,35 @@ usersRouter.post('/login', (req,res)=>{
 })
 
 //specific logged in buyer/seller's page
-usersRouter.get('/:id', (req,res)=>{
-    const {id} = req.params
-    res.status(200)
-    .send(`users ${id}`)
-    
-    
-    
-    })
-
+// usersRouter.get('/:id', (req,res)=>{
+//     const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
+//     const id = req.params
+//     return usersServices.read(id)
+//     .then((response)=>{
+//         res.status(200)
+//         res.json({'test':'1'})
+//     })
+//     .catch((err)=>{
+//         res.status(400)
+//         res.send('information missing')
+//     })
+        
    
+       
+    
+
+
+// })
+
+  usersRouter.get('/:id',(req,res)=>{
+    const {id} = req.params
+    // const id = 5
+   return usersServices.read(req.params)
+    .then((response)=>{
+        res.status(200)
+        res.json({'test':'1'})
+    })
+}) 
 
 //update specific buyer/seller page    
 usersRouter.put('/:id', (req,res)=>{
@@ -122,6 +153,7 @@ usersRouter.post('/order', (req,res)=>{
                 })
 module.exports={
 
-        usersRouter
+        usersRouter,
+        router
 
 }
