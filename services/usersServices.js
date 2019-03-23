@@ -8,9 +8,9 @@ return db.any('INSERT INTO users (name , email, address, number, country, state,
 
 
 
-usersServices.read=(id)=>{
+usersServices.read=(username)=>{
     // const id = 5
-return db.any('SELECT * FROM users WHERE id=${id}', {id})
+return db.one('SELECT * FROM users WHERE name=${username}', {username})
 }
 
 usersServices.update=(name , email, address, number, country, state, zip, cc,age,type, description, shopname)=>{
@@ -22,4 +22,4 @@ return db.any('DELETE FROM users WHERE id=${id}', {id})
 }
 
 
-module.exports={ usersServices}
+module.exports={ usersServices }

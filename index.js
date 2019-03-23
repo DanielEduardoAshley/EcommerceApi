@@ -1,5 +1,5 @@
 
-const port = 3100;
+const port = process.env.PORT || 3100;
 
 const {app} = require('./app')
 
