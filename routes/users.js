@@ -4,7 +4,7 @@ const {usersServices} = require('../services/usersServices');
 
 //gets  buyer/seller 
 usersRouter.get('/:username', (req,res)=>{
-    const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
+    // const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
     const {username} = req.params;
    usersServices.read(username)
         .then((response)=>{

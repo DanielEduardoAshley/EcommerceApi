@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS product;
-DROP TABLE IF EXISTS purchase;
-DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS product CASCADE;
+DROP TABLE IF EXISTS purchase CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
 
 
 
@@ -25,7 +25,10 @@ CREATE TABLE users (
 
 CREATE TABLE product (
   id SERIAL PRIMARY KEY,
-  seller_id INT REFERENCES users(id) NOT NULL,
+  seller_id INT NOT NULL,
+  FOREIGN KEY (seller_id)
+  REFERENCES users(id)
+  ON DELETE CASCADE,
   description VARCHAR NOT NULL,                 
   duration VARCHAR NOT NULL,
   location VARCHAR NOT NULL,
@@ -38,18 +41,30 @@ CREATE TABLE product (
 
 CREATE TABLE purchase (
 id SERIAL PRIMARY KEY,
-users_id INT REFERENCES users(id) NOT NULL,
+users_id INT NOT NULL,
+FOREIGN KEY (users_id)
+REFERENCES users(id)
+ON DELETE CASCADE,
 totalamount VARCHAR NOT NULL,
 guest_info JSON
 );
 
 CREATE TABLE orders (
 id SERIAL PRIMARY KEY,
-product_id INT REFERENCES users(id) NOT NULL,
-purchase_id INT REFERENCES purchase(id) NOT NULL,
+product_id INT NOT NULL,
+FOREIGN KEY (product_id)
+REFERENCES users(id)
+ON DELETE CASCADE,
+purchase_id INT NOT NULL,
+FOREIGN KEY (purchase_id)
+REFERENCES purchase(id)
+ON DELETE CASCADE,
 quantity INT,
 descriptions VARCHAR NOT NULL,
-buyer_guest_id VARCHAR NULL
+buyer_guest_id VARCHAR NULL,
+FOREIGN KEY (product_id)
+REFERENCES users(id)
+ON DELETE CASCADE
 );
 
 
