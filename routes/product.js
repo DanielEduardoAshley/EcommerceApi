@@ -1,42 +1,51 @@
 const express = require('express');
 const productRouter = express.Router();
-// const productService = require('../services/product');
+const {productServices} = require('../services/productServices');
 
 
-productRouter.post('/product', (req,res)=>{
-
-    res.json('product')
+//create a seller's products --Authen
+productRouter.post('/', (req,res)=>{
+    const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
+    res.send('product')
 
 
 
 })
 
+//get all products of a seller
+productRouter.get('/', (req,res)=>{
+    const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
+    res.send('product 3')
 
-productRouter.get('/product', (req,res)=>{
 
-    res.json('product')
-    
-    
-    
+
+})
+
+//get a specific product of a specific user
+productRouter.get('/:product', (req,res)=>{
+    const {id} = req.params
+    res.send(`product ${id}`)
     })
 
-
-
-productRouter.put('/product', (req,res)=>{
-
-    res.json('product')
+//update a seller product --Authen
+productRouter.put('/:product_id', (req,res)=>{
+    const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
+    const {product_id} = req.params
+    res.send(`product, ${product_id}`)
         
         
         
         })
 
-productRouter.delete('/product', (req,res)=>{
-
-    res.json('product')
+//delete a sellers specific product --Authen
+productRouter.delete('/:product_id', (req,res)=>{
+    const {product_id} = req.params
+    res.send(`product, ${product_id}`)
                 
                 
                 
                 })
+
 
 
 module.exports={

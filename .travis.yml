@@ -6,6 +6,13 @@ install:
   - npm install
 before_script:
   - export COVERAGE_TOKEN=$COVERAGE_TOKEN
+  - export HEROKU_KEY=$HEROKU_KEY
 script:
   - npm run write-coveralls
   - npm test
+deploy:
+  provider: heroku
+  api_key: $HEROKU_KEY
+  app: ecommercebackend
+  on: master 
+  strategy: git

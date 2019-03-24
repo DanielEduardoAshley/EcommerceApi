@@ -1,5 +1,5 @@
 const express = require('express');
-const purchasesRouter = express.Router();
+const purchaseRouter = express.Router();
 // const purchaseService = require('../services/purchase');
 
 

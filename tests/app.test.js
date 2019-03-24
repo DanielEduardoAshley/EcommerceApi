@@ -1,25 +1,25 @@
 const request = require('supertest')
 const {app} = require('../app.js')
+
 jest.mock('../services/dbServices')
 const db = require('../services/dbServices')
+
 jest.mock('../services/usersServices')
-// jest.mock('../app.js')
-const {usersRouter} = require('../routes/users')
 const {usersServices} = require('../services/usersServices')
-const {router} = require('../routes/users')
+
+const {usersRouter} = require('../routes/users')
 
 // describe('GET/users/5', ()=>{
 test('expect {test:1}', done =>{
     usersServices.read.mockImplementation(()=>{
         return Promise.resolve()
-    
     })
-    console.log(app.use('/users', usersRouter))
-     request(app.use('/users', usersRouter))
-        .get('/')
+    // console.log(app.use('/users', usersRouter))
+     request(app)
+        .get('/users/foobar')
         .then((response)=>{
             console.log(response.status)
-            expect(response.status).toBe(200)
+            expect(response.status).toBe(204)
             done();
         })
     //     .catch(()=>{

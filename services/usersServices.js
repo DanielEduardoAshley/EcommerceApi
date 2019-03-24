@@ -6,11 +6,10 @@ return db.any('INSERT INTO users (name , email, address, number, country, state,
 
 }
 
-
-
 usersServices.read=(username)=>{
     // const id = 5
-return db.one('SELECT * FROM users WHERE name=${username}', {username})
+    console.log(username)
+return db.any('SELECT * FROM users WHERE username=${username}', {username});
 }
 
 usersServices.update=(name , email, address, number, country, state, zip, cc,age,type, description, shopname)=>{
