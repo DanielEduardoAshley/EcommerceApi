@@ -62,5 +62,5 @@ INSERT INTO product (seller_id,description, duration,location, type, name, price
 INSERT INTO purchase (users_id, totalamount, guest_info) VALUES
 (1, '$23', '{"guest" : "guest"}');
 
-INSERT INTO orders (product_id,purchase_id, quantity, descriptions, buyer_guest_id) VALUES
+INSERT INTO orders (product_id, purchase_id, quantity, descriptions, buyer_guest_id) VALUES
 (1,1,1,'BEachTennis',1);

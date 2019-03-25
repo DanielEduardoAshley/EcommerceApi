@@ -19,7 +19,7 @@ test('expect {test:1}', done =>{
         .get('/users/foobar')
         .then((response)=>{
             console.log(response.status)
-            expect(response.status).toBe(204)
+            expect(response.status).toBe(200)
             done();
         })
     //     .catch(()=>{
@@ -29,49 +29,117 @@ test('expect {test:1}', done =>{
 
 })
 
-// })})
+
+test('expect {test:1}', done =>{
+    usersServices.read.mockImplementation(()=>{
+        return Promise.reject()
+    })
+    // console.log(app.use('/users', usersRouter))
+     request(app)
+        .get('/users/foobar')
+        .then((response)=>{
+            console.log(response.status)
+            expect(response.status).toBe(400)
+            done();
+        })
+      
+
+})
+
+test('expect {test:1}', done =>{
+    usersServices.update.mockImplementation(()=>{
+        return Promise.resolve()
+    })
+     request(app)
+        .put('/users/foobar')
+        .then((response)=>{
+            console.log(response.status)
+            expect(response.status).toBe(200)
+            done();
+        })
+      
+
+})
+
+test('expect {test:1}', done =>{
+    usersServices.update.mockImplementation(()=>{
+        return Promise.reject()
+    })
+     request(app)
+        .put('/users/foobar')
+        .then((response)=>{
+            console.log(response.status)
+            expect(response.status).toBe(400)
+            done();
+        })
+      
+
+})
+
+test('expect {test:1}', done =>{
+    usersServices.delete.mockImplementation(()=>{
+        return Promise.resolve()
+    })
+     request(app)
+        .delete('/users/foobar')
+        .then((response)=>{
+            console.log(response.status)
+            expect(response.status).toBe(200)
+            done();
+        })
+      
+
+})
+
+test('expect {test:1}', done =>{
+    usersServices.delete.mockImplementation(()=>{
+        return Promise.reject()
+    })
+     request(app)
+        .delete('/users/foobar')
+        .then((response)=>{
+            console.log(response.status)
+            expect(response.status).toBe(400)
+            done();
+        })
+      
+
+})
+
+test('expect {test:1}', done =>{
+    usersServices.read.mockImplementation(()=>{
+        return Promise.resolve()
+    })
+    // console.log(app.use('/users', usersRouter))
+     request(app)
+        .get('/users/orders/1')
+        .then((response)=>{
+            console.log(response.status)
+            expect(response.status).toBe(200)
+            done();
+        })
+    //     .catch(()=>{
+    //         // expect(404).toBe(404)
+    //         done()
+    // })
+
+})
+
+test('expect {test:1}', done =>{
+    usersServices.read.mockImplementation(()=>{
+        return Promise.reject()
+    })
+    // console.log(app.use('/users', usersRouter))
+     request(app)
+        .get('/users/orders/1')
+        .then((response)=>{
+            console.log(response.status)
+            expect(response.status).toBe(400)
+            done();
+        })
+      
+
+})
 
 
-// test('it should not pass', ()=>{
-//     expect(true).toBe(true)
-// });
-
-
-// test('should get back a string 400 if empty', done =>{
-//     request(app)
-//     .get('/:id')
-//     .send({})
-//     .catch(()=>{
-//         expect(response.status).tobe(400)
-//         done();
-
-//     })
-
-
-
-
-// })
-
-// test('expect to get back 200 if all informatino sent',done=>{
-//     request(app)
-//     .post('/')
-//     .send({
-
-//         name : 'a', 
-//         email : 'b', 
-//         address : 'c', 
-//         number : 'd',
-//         country : 'e', 
-//         state: 'f', 
-//         zip: 'g', 
-//         cc: 'h',
-//         age: 'i',
-//         type: 'j',
-//         descritpion : 'k', 
-//         shopname : 'l'
-//     })
-//     .then((response)=>{
-//         expect(response.status).tobe(204);
-//         done();
-//     })
 

@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const { usersRouter } = require('./routes/users');
-const { ordersRouter } = require('./routes/orders');
 const { productRouter } = require('./routes/product');
 const { purchaseRouter } = require('./routes/purchase');
 
@@ -13,7 +12,6 @@ app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/users', usersRouter);
-app.use('/orders', ordersRouter);
 app.use('/product', productRouter);
 app.use('/purchase', purchaseRouter)
 

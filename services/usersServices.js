@@ -2,7 +2,7 @@ const {db} = require('./dbServices')
 const usersServices = {}
 
 usersServices.create=(name , email, address, number, country, state, zip, cc,age,type, description, shopname)=>{
-return db.any('INSERT INTO users (name , email, address, number, country, state, zip, cc,age,type, description, shopname) VALUES (${name} , ${email}, ${address}, ${number}, ${country}, ${state}, ${zip}, ${cc},${age},${type}, ${description}, ${shopname}', {name , email, address, number, country, state, zip, cc,age,type, description, shopname})
+return db.any('INSERT INTO users (name , email, address, number, country, state, zip, cc,age,type, description, shopname) VALUES (${name} , ${email}, ${address}, ${number}, ${country}, ${state}, ${zip}, ${cc},${age},${type}, ${description}, ${shopname})', {name , email, address, number, country, state, zip, cc,age,type, description, shopname})
 
 }
 

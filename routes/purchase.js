@@ -1,10 +1,9 @@
 const express = require('express');
 const purchaseRouter = express.Router();
-// const purchaseService = require('../services/purchase');
+// const {purchasesServices} = require('../services/purchase');
 
 
-purchaseRouter.post('/purchase', (req,res)=>{
-
+purchaseRouter.post('/', (req,res)=>{
     res.json('purchase')
 
 
@@ -12,7 +11,7 @@ purchaseRouter.post('/purchase', (req,res)=>{
 })
 
 
-purchaseRouter.get('/purchase', (req,res)=>{
+purchaseRouter.get('/:id', (req,res)=>{
 
     res.json('purchase')
     
@@ -20,23 +19,13 @@ purchaseRouter.get('/purchase', (req,res)=>{
     
     })
 
+purchaseRouter.get('/:user_id', (req,res)=>{
 
-
-purchaseRouter.put('/purchase', (req,res)=>{
-
-    res.json('purchase')
+        res.json('purchase')
         
         
         
-        })
-
-purchaseRouter.delete('/purchase', (req,res)=>{
-
-    res.json('purchase')
-                
-                
-                
-                })
+    })
 
 
 module.exports={
