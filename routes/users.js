@@ -2,6 +2,24 @@ const express = require('express');
 const usersRouter = express.Router();
 const {usersServices} = require('../services/usersServices');
 
+//create user/seller
+usersRouter.post('/', (req,res)=>{
+    const {name , email, address, number, country, state, zip, cc,age,type,description, shopname} = req.body
+   usersServices.create(name , email, address, number, country, state, zip, cc,age,type, description, shopname)
+        .then((response)=>{
+            console.log('hello')
+            console.log('RESPONSE IS:', response)
+        res.status(200)
+        res.send({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send(err)
+    })
+        
+})
+
+
 //gets  buyer/seller 
 usersRouter.get('/:username', (req,res)=>{
     const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
@@ -18,11 +36,6 @@ usersRouter.get('/:username', (req,res)=>{
         res.send(err)
     })
         
-   
-       
-    
-
-
 })
 //login buyer/seller
 // usersRouter.post('/login', (req,res)=>{
