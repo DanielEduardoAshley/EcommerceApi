@@ -7,13 +7,14 @@
     "test": "tests"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
-    "cors": "^2.8.5",
     "express": "^4.16.4",
-    "supertest": "^4.0.2",
-    "pg-promise": "^8.5.5"
+    "pg-promise": "^8.5.5",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
+    "cors": "^2.8.5",
     "coveralls": "^3.0.3",
     "jest": "^24.5.0"
   },

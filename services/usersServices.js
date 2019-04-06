@@ -6,10 +6,24 @@ return db.any('INSERT INTO users (name , email, address, number, country, state,
 
 }
 
+usersServices.readUser=(uid)=>{
+    // const id = 5
+return db.any('SELECT * FROM users WHERE uid=${uid}', {uid});
+}
+
+
 usersServices.read=(username)=>{
     // const id = 5
     console.log(username)
 return db.any('SELECT * FROM users WHERE username=${username}', {username});
+}
+
+
+usersServices.searchbyuser=(userquery)=>{
+const qdes = `%${userquery}%`
+const sql = 'SELECT * FROM users WHERE name LIKE $[qdes] OR username LIKE $[qdes] OR email LIKE $[qdes]'
+return db.any(sql,{qdes})
+
 }
 
 usersServices.update=(name , email, address, number, country, state, zip, cc,age,type, description, shopname)=>{

@@ -19,7 +19,8 @@ CREATE TABLE users (
   age INT,
   type VARCHAR NOT NULL,
   description VARCHAR NOT NULL,
-  shopname VARCHAR NULL
+  shopname VARCHAR NULL,
+  uid VARCHAR Null
 );
 
 CREATE TABLE product (
@@ -53,8 +54,8 @@ buyer_guest_id VARCHAR NULL
 
 
 
-INSERT INTO users (username,name, email, address, number, country, state, age, type, description, shopname) VALUES
-('dash','John', 'john@email.com', '123 Wilbury Drive','123-456-7890','USA', 'CA', 26, 'buyer','sellingexperiences','shopmix');
+INSERT INTO users (username,name, email, address, number, country, state, age, type, description, shopname, uid) VALUES
+('dash','John', 'john@email.com', '123 Wilbury Drive','123-456-7890','USA', 'CA', 26, 'buyer','sellingexperiences','shopmix', 'ddwf1');
 
 INSERT INTO product (seller_id,description, duration,location, type, name, price, images) VALUES
 (1,'tennis on the beach','1month' ,'Ca', 'activity', 'SandyTennis','$65', '{"url" : "url"}');

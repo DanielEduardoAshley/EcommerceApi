@@ -5,8 +5,9 @@ const {productServices} = require('../services/productServices')
 
 //create a seller's products --Authen
 productRouter.post('/', (req,res)=>{
-    const {name , email, address, number, country, state, zip, cc,age,type,descritpion, shopname} = req.body
-    productServices.create(name , email, address, number, country, state, zip, cc,age,type,descritpion, shopname)
+    console.log('hiDaniel')
+    const {seller_id,description, duration,location, type, name, price, images} = req.body
+    productServices.create(seller_id,description, duration,location, type, name, price, images)
     .then((response)=>{
         console.log('hello')
         console.log('RESPONSE IS:', response)
@@ -24,8 +25,8 @@ productRouter.post('/', (req,res)=>{
 //get all products of a seller
 productRouter.get('/:user_id/product', (req,res)=>{
     const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
-    const {id} = req.params
-    productServices.read(id)
+    const {user_id} = req.params
+    productServices.read(user_id)
     .then((response)=>{
         console.log('hello')
         console.log('RESPONSE IS:', response)
@@ -57,6 +58,24 @@ productRouter.get('/:user_id/product/:product_id', (req,res)=>{
         res.send(err)
     })
 })
+//Search product by product/activity
+productRouter.get('/searchproducts/:type/query/:searchquery', (req,res)=>{
+    const { type, searchquery} = req.params
+    console.log('hello')
+    productServices.searchproducts(searchquery, type)
+    .then((response)=>{
+        console.log('hello')
+        console.log('RESPONSE IS:', response)
+        res.status(200)
+        res.send({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send(err)
+    })
+})
+
+
 
 //update a seller product --Authen
 productRouter.put('/:user_id/product/:product_id', (req,res)=>{
