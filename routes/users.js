@@ -40,6 +40,7 @@ usersRouter.post('/:uid', (req, res)=>{
 usersRouter.get('/:username', (req,res)=>{
     const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
     const {username} = req.params;
+    console.log('whatwrong')
    usersServices.read(username)
         .then((response)=>{
             console.log('hello')
@@ -54,6 +55,23 @@ usersRouter.get('/:username', (req,res)=>{
         
 })
 
+//get user by id
+usersRouter.get('/:id/user', (req,res)=>{
+    const {id} = req.params;
+    console.log('whatwrong')
+   usersServices.readid(id)
+        .then((response)=>{
+            console.log('hello')
+            console.log('RESPONSE IS:', response)
+        res.status(200)
+        res.send({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send(err)
+    })
+        
+})
 
 //search by user
 usersRouter.get('/searchuser/:userquery', (req,res)=>{
@@ -86,15 +104,7 @@ usersRouter.get('/searchuser/:userquery', (req,res)=>{
 
    
 
-// usersRouter.get('/:id',(req,res)=>{
-//     const {id} = req.params
-//     // const id = 5
-//    return usersServices.read(req.params)
-//     .then((response)=>{
-//         res.status(200)
-//         res.json({'test':'1'})
-//     })
-// }) 
+
 
 //update specific buyer/seller page    
 usersRouter.put('/:username', (req,res)=>{

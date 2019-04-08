@@ -23,10 +23,10 @@ productRouter.post('/', (req,res)=>{
 })
 
 //get all products of a seller
-productRouter.get('/:user_id/product', (req,res)=>{
-    const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
-    const {user_id} = req.params
-    productServices.read(user_id)
+productRouter.get('/:seller_id/products', (req,res)=>{
+    const {seller_id} = req.params
+    console.log('got there')
+    productServices.readAll(seller_id)
     .then((response)=>{
         console.log('hello')
         console.log('RESPONSE IS:', response)
@@ -43,10 +43,9 @@ productRouter.get('/:user_id/product', (req,res)=>{
 })
 
 //get a specific product of a specific seller
-productRouter.get('/:user_id/product/:product_id', (req,res)=>{
+productRouter.get('/:product_id/product', (req,res)=>{
     const {product_id} = req.params
-    const {user_id} =req.params
-    productServices.read(product_id, user_id)
+    productServices.read(product_id)
     .then((response)=>{
         console.log('hello')
         console.log('RESPONSE IS:', response)
@@ -78,11 +77,12 @@ productRouter.get('/searchproducts/:type/query/:searchquery', (req,res)=>{
 
 
 //update a seller product --Authen
-productRouter.put('/:user_id/product/:product_id', (req,res)=>{
+productRouter.put('/:product_id', (req,res)=>{
+    console.log('thispoint')
     const {description, duration,location, type, name, price, images} = req.body
     const {product_id} = req.params
     const {user_id} = req.params
-    productServices.update(user_id,product_id,description, duration,location, type, name, price, images)
+    productServices.update(product_id,description, duration,location, type, name, price, images)
     .then((response)=>{
         // console.log('hello')
         // console.log('RESPONSE IS:', response)
@@ -96,11 +96,10 @@ productRouter.put('/:user_id/product/:product_id', (req,res)=>{
 })
 
 //delete a sellers specific product --Authen
-productRouter.delete('/:user_id/product/:product_id', (req,res)=>{
+productRouter.delete('/:product_id', (req,res)=>{
     const {product_id} = req.params
-    const {user_id} = req.params
 
-    productServices.delete(user_id,product_id)
+    productServices.delete(product_id)
     .then((response)=>{
         console.log('hello')
         console.log('RESPONSE IS:', response)

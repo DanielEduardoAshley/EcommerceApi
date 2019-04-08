@@ -13,9 +13,12 @@ return db.any('SELECT * FROM users WHERE uid=${uid}', {uid});
 
 
 usersServices.read=(username)=>{
-    // const id = 5
     console.log(username)
 return db.any('SELECT * FROM users WHERE username=${username}', {username});
+}
+
+usersServices.readid=(id)=>{
+return db.any('SELECT * FROM users WHERE id=${id}', {id});
 }
 
 
