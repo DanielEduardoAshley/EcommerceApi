@@ -22,7 +22,7 @@ productServices.readAll=(seller_id)=>{
 productServices.searchproducts=(searchquery, type)=>{
     const qdes = `%${searchquery}%`
 // const qdes = '%John%'
-const sql = 'SELECT * FROM product WHERE type=${type} AND name LIKE $[qdes] OR description LIKE $[qdes]' 
+const sql = 'SELECT * FROM product WHERE type=${type} AND name LIKE $[qdes] OR type=${type} AND description LIKE $[qdes]' 
     return db.any(sql, {type, qdes})
     }
 //Update a product
