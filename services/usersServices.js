@@ -21,6 +21,10 @@ usersServices.readid=(id)=>{
 return db.any('SELECT * FROM users WHERE id=${id}', {id});
 }
 
+usersServices.readAllusers=()=>{
+   
+return db.any('SELECT * FROM users');
+    }
 
 usersServices.searchbyuser=(userquery)=>{
 const qdes = `%${userquery}%`
@@ -29,8 +33,9 @@ return db.any(sql,{qdes})
 
 }
 
-usersServices.update=(name , email, address, number, country, state, zip, cc,age,type, description, shopname)=>{
-return db.any('UPDATE users SET name=${name} , email=${email}, address=${address}, number=${number}, country=${country}, state=${state}, zip=${zip}, cc=${cc},age=${age},type=${type}, description=${description}, shopname=${shopname}', {name , email, address, number, country, state, zip, cc,age,type, description, shopname})
+usersServices.update=(username,name , email, address, number, country, state, zip, cc,age,type, description, shopname, id)=>{
+    console.log('mikecheck')
+return db.any('UPDATE users SET username=${username}, name=${name} , email=${email}, address=${address}, number=${number}, country=${country}, state=${state}, zip=${zip}, cc=${cc},age=${age},type=${type}, description=${description}, shopname=${shopname} WHERE id=${id}', {username, name , email, address, number, country, state, zip, cc,age,type, description, shopname, id})
 }
 
 usersServices.delete=(id)=>{

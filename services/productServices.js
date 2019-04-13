@@ -14,10 +14,21 @@ productServices.read=(id)=>{
 
 //Get all products of a seller
 productServices.readAll=(seller_id)=>{
-    console.log('here as well')
-    return db.any('SELECT * FROM product WHERE seller_id=${seller_id}', {seller_id})
+        console.log('here as well')
+        return db.any('SELECT * FROM product WHERE seller_id=${seller_id}', {seller_id})
     }
 
+productServices.readAllproducts=()=>{
+        console.log('here as well')
+        const product = 'product'
+        return db.any('SELECT * FROM product WHERE type=${product}', {product})
+        }
+
+productServices.readAllactivities=()=>{
+        console.log('here as well')
+        const activity = 'activity'
+        return db.any('SELECT * FROM product WHERE type=${activity}', {activity})
+            }
 
 productServices.searchproducts=(searchquery, type)=>{
     const qdes = `%${searchquery}%`

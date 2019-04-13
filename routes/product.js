@@ -57,6 +57,9 @@ productRouter.get('/:product_id/product', (req,res)=>{
         res.send(err)
     })
 })
+
+
+
 //Search product by product/activity
 productRouter.get('/searchproducts/:type/query/:searchquery', (req,res)=>{
     const { type, searchquery} = req.params
@@ -73,6 +76,37 @@ productRouter.get('/searchproducts/:type/query/:searchquery', (req,res)=>{
         res.send(err)
     })
 })
+
+//get all products
+productRouter.get('/homeproducts', (req,res)=>{
+    productServices.readAllproducts()
+    .then((response)=>{
+        console.log('hello')
+        console.log('RESPONSE IS:', response)
+        res.status(200)
+        res.send({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send(err)
+    })
+})
+
+//get all activities
+productRouter.get('/homeactivities', (req,res)=>{
+    productServices.readAllactivities()
+    .then((response)=>{
+        console.log('hello')
+        console.log('RESPONSE IS:', response)
+        res.status(200)
+        res.send({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send(err)
+    })
+})
+
 
 
 

@@ -73,6 +73,24 @@ usersRouter.get('/:id/user', (req,res)=>{
         
 })
 
+//get all users
+usersRouter.get('/home/profiles', (req,res)=>{
+    console.log('whatwrong')
+   usersServices.readAllusers()
+        .then((response)=>{
+            console.log('hello')
+            console.log('RESPONSE IS:', response)
+        res.status(200)
+        res.send({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send(err)
+    })
+        
+})
+
+
 //search by user
 usersRouter.get('/searchuser/:userquery', (req,res)=>{
     console.log('Daniel')
@@ -107,12 +125,12 @@ usersRouter.get('/searchuser/:userquery', (req,res)=>{
 
 
 //update specific buyer/seller page    
-usersRouter.put('/:username', (req,res)=>{
-    const {name , email, address, number, country, state, zip, cc,age,type,descritpion, shopname} = req.body
-    // const {username} = req.params
-    usersServices.update(name, email, address, number,country, state, zip, cc,age,type,descritpion, shopname)
+usersRouter.put('/:id', (req,res)=>{
+    const {username,name , email, address, number, country, state, zip, cc,age,type,description, shopname} = req.body
+    const {id} = req.params
+    usersServices.update(username, name, email, address, number,country, state, zip, cc,age,type,description, shopname, id)
         .then((response)=>{
-            console.log('hello')
+            console.log('hello', id)
             console.log('RESPONSE IS:', response)
         res.status(200)
         res.send({response})
