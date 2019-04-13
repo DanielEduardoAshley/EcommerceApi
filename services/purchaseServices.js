@@ -1,8 +1,10 @@
 const {db} = require('./dbServices')
 const purchasesServices = {}
 
-purchasesServices.create=(users_id, totalamount, guest_info)=>{
-  return  db.any('INSERT INTO purchase (users_id, totalamount, guest_info) VALUES (users_id=${users_id}, totalamount=${totalamount}, guest_id={guest_id});', {users_id, totalamount, guest_info})
+purchasesServices.create=(users_id, receipt, totalamount, name,address,city,state,zip,country,cc)=>{
+  console.log('ppur',typeof users_id,typeof receipt,typeof totalamount, typeof name,typeof address, typeof city,typeof state,typeof zip,typeof country,typeof cc)
+  return  db.any('INSERT INTO purchase (users_id, receipt, totalamount, name, address, city, state,zip, country,cc) VALUES (${users_id}, ${receipt},${totalamount},${name},${address},${city},${state},${zip},${country},${cc});' ,{users_id, receipt,totalamount,name,address,city,state,zip,country,cc} )
+
     
 } 
 

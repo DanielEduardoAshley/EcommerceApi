@@ -3,7 +3,7 @@ const usersRouter = express.Router();
 const {usersServices} = require('../services/usersServices');
 
 //create user/seller
-usersRouter.post('/', (req,res)=>{
+usersRouter.post('', (req,res)=>{
     
     const {name , email, address, number, country, state, zip, cc,age,type,description, shopname} = req.body
    usersServices.create(name , email, address, number, country, state, zip, cc,age,type, description, shopname)

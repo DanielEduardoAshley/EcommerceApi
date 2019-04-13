@@ -3,12 +3,13 @@ const purchaseRouter = express.Router();
 const {purchasesServices} = require('../services/purchaseServices');
 
 
-purchaseRouter.post('/', (req,res)=>{
-    const {users_id, totalamount, guest_info} = req.body
-    purchasesServices.create(users_id, totalamount, guest_info)
+purchaseRouter.post('', (req,res)=>{
+    const {users_id, receipt, totalamount, name,address,city,state,zip,country,cc} = req.body
+    console.log('healthcheck',users_id, receipt, totalamount, name,address,city,state,zip,country,cc)
+    purchasesServices.create(parseInt(users_id), receipt, parseInt(totalamount), name,address,city,state,parseInt(zip),country,cc)
     .then((response)=>{
         console.log('hello')
-        console.log('RESPONSE IS:', response)
+        console.log(' purchase IS:', response)
     res.status(200)
     res.send({response})
 })

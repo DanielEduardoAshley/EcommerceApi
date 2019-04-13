@@ -38,13 +38,14 @@ CREATE TABLE product (
 
 CREATE TABLE purchase (
 id SERIAL PRIMARY KEY,
-users_id INT REFERENCES users(id)  NULL,
+users_id INT NULL ,
 receipt VARCHAR NOT NULL,
-totalamount VARCHAR NOT NULL,
+totalamount Int NOT NULL,
 name VARCHAR NOT NULL,
 address VARCHAR NOT NULL,
 city VARCHAR NOT NULL,
 state VARCHAR NOT NULL,
+zip INT NOT NULL,
 country VARCHAR NOT NULL,
 cc VARCHAR NOT NULL
 );
@@ -66,8 +67,8 @@ INSERT INTO users (username,name, email, address, number, country, state, age, t
 INSERT INTO product (seller_id,description, duration,location, type, name, price, images) VALUES
 (1,'tennis on the beachcghg','1month' ,'Ca', 'activity', 'SandyTennis',65, '[]');
 
-INSERT INTO purchase (users_id, receipt, totalamount, name, address, city, state, country,cc) VALUES
-(1, '4rfrrgfhg','$23', 'John', '1234 Wilbury St','brooklyn', 'CA','USA', '3432');
+INSERT INTO purchase (users_id, receipt, totalamount, name, address, city, state,zip, country,cc) VALUES
+(1, '4rfrrgfhg',23, 'John', '1234 Wilbury St','brooklyn', 'CA',132321,'USA', '3432');
 
 INSERT INTO orders (product_id, purchase_id, quantity, description, receipt) VALUES
 (1,1,1,'BEachTennis','1gfg');
