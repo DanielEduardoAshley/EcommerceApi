@@ -92,6 +92,37 @@ test('expect {test:1}', done =>{
 })
 
 test('expect {test:1}', done =>{
+    usersServices.readUser.mockImplementation(()=>{
+        return Promise.resolve()
+    })
+     request(app)
+        .post('/users/uid')
+        .then((response)=>{
+            console.log(response.status)
+            expect(response.status).toBe(200)
+            done();
+        })
+   
+
+})
+
+test('expect {test:1}', done =>{
+    usersServices.readUser.mockImplementation(()=>{
+        return Promise.reject()
+    })
+     request(app)
+        .post('/users/uid')
+        .then((response)=>{
+            console.log(response.status)
+            expect(response.status).toBe(400)
+            done();
+        })
+      
+
+})
+
+
+test('expect {test:1}', done =>{
     usersServices.update.mockImplementation(()=>{
         return Promise.resolve()
     })

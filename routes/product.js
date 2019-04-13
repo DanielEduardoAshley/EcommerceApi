@@ -5,8 +5,9 @@ const {productServices} = require('../services/productServices')
 
 //create a seller's products --Authen
 productRouter.post('/', (req,res)=>{
-    const {name , email, address, number, country, state, zip, cc,age,type,descritpion, shopname} = req.body
-    productServices.create(name , email, address, number, country, state, zip, cc,age,type,descritpion, shopname)
+    console.log('hiDaniel')
+    const {seller_id,description, duration,location, type, name, price, images} = req.body
+    productServices.create(seller_id,description, duration,location, type, name, price, images)
     .then((response)=>{
         console.log('hello')
         console.log('RESPONSE IS:', response)
@@ -22,10 +23,10 @@ productRouter.post('/', (req,res)=>{
 })
 
 //get all products of a seller
-productRouter.get('/:user_id/product', (req,res)=>{
-    const {name , email, address, number, country, state, zip, cc,age,type,descritpion=null, shopname=null} = req.body
-    const {id} = req.params
-    productServices.read(id)
+productRouter.get('/:seller_id/products', (req,res)=>{
+    const {seller_id} = req.params
+    console.log('got there')
+    productServices.readAll(seller_id)
     .then((response)=>{
         console.log('hello')
         console.log('RESPONSE IS:', response)
@@ -42,10 +43,9 @@ productRouter.get('/:user_id/product', (req,res)=>{
 })
 
 //get a specific product of a specific seller
-productRouter.get('/:user_id/product/:product_id', (req,res)=>{
+productRouter.get('/:product_id/product', (req,res)=>{
     const {product_id} = req.params
-    const {user_id} =req.params
-    productServices.read(product_id, user_id)
+    productServices.read(product_id)
     .then((response)=>{
         console.log('hello')
         console.log('RESPONSE IS:', response)
@@ -58,12 +58,65 @@ productRouter.get('/:user_id/product/:product_id', (req,res)=>{
     })
 })
 
+
+
+//Search product by product/activity
+productRouter.get('/searchproducts/:type/query/:searchquery', (req,res)=>{
+    const { type, searchquery} = req.params
+    console.log('hello')
+    productServices.searchproducts(searchquery, type)
+    .then((response)=>{
+        console.log('hello')
+        console.log('RESPONSE IS:', response)
+        res.status(200)
+        res.send({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send(err)
+    })
+})
+
+//get all products
+productRouter.get('/homeproducts', (req,res)=>{
+    productServices.readAllproducts()
+    .then((response)=>{
+        console.log('hello')
+        console.log('RESPONSE IS:', response)
+        res.status(200)
+        res.send({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send(err)
+    })
+})
+
+//get all activities
+productRouter.get('/homeactivities', (req,res)=>{
+    productServices.readAllactivities()
+    .then((response)=>{
+        console.log('hello')
+        console.log('RESPONSE IS:', response)
+        res.status(200)
+        res.send({response})
+    })
+    .catch((err)=>{
+        res.status(400)
+        res.send(err)
+    })
+})
+
+
+
+
 //update a seller product --Authen
-productRouter.put('/:user_id/product/:product_id', (req,res)=>{
+productRouter.put('/:product_id', (req,res)=>{
+    console.log('thispoint')
     const {description, duration,location, type, name, price, images} = req.body
     const {product_id} = req.params
     const {user_id} = req.params
-    productServices.update(user_id,product_id,description, duration,location, type, name, price, images)
+    productServices.update(product_id,description, duration,location, type, name, price, images)
     .then((response)=>{
         // console.log('hello')
         // console.log('RESPONSE IS:', response)
@@ -77,11 +130,10 @@ productRouter.put('/:user_id/product/:product_id', (req,res)=>{
 })
 
 //delete a sellers specific product --Authen
-productRouter.delete('/:user_id/product/:product_id', (req,res)=>{
+productRouter.delete('/:product_id', (req,res)=>{
     const {product_id} = req.params
-    const {user_id} = req.params
 
-    productServices.delete(user_id,product_id)
+    productServices.delete(product_id)
     .then((response)=>{
         console.log('hello')
         console.log('RESPONSE IS:', response)

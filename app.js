@@ -8,6 +8,10 @@ const { purchaseRouter } = require('./routes/purchase');
 
 const { usersServices } = require('./services/usersServices');
 
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin' , "*");
+//     next();
+// });
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 app.use(cors());

@@ -3,29 +3,47 @@ const productServices = {}
 
 //Creates a product
 productServices.create=(seller_id,description, duration,location, type, name, price, images)=>{
-    return db.any('INSERT INTO product (seller_id,description, duration,location, type, name, price, images)', {seller_id,description, duration,location, type, name, price, images})
+    return db.one('INSERT INTO product (seller_id,description, duration,location, type, name, price, images) VALUES (${seller_id}, ${description}, ${duration}, ${location}, ${type}, ${name}, ${price}, ${images}) returning id', {seller_id,description, duration,location, type, name, price, images})
     
     }
 //Gets a specific product by product id 
 productServices.read=(id)=>{
         // const id = 5
-    return db.one('SELECT * FROM products WHERE id=${id}', {id})
+    return db.any('SELECT * FROM product WHERE id=${id}', {id})
     }
 
 //Get all products of a seller
-productServices.read=(seller_id)=>{
-        // const id = 5
-    return db.one('SELECT * FROM products WHERE seller_id=${seller_id}', {seller_id})
+productServices.readAll=(seller_id)=>{
+        console.log('here as well')
+        return db.any('SELECT * FROM product WHERE seller_id=${seller_id}', {seller_id})
     }
 
+productServices.readAllproducts=()=>{
+        console.log('here as well')
+        const product = 'product'
+        return db.any('SELECT * FROM product WHERE type=${product}', {product})
+        }
+
+productServices.readAllactivities=()=>{
+        console.log('here as well')
+        const activity = 'activity'
+        return db.any('SELECT * FROM product WHERE type=${activity}', {activity})
+            }
+
+productServices.searchproducts=(searchquery, type)=>{
+    const qdes = `%${searchquery}%`
+// const qdes = '%John%'
+const sql = 'SELECT * FROM product WHERE type=${type} AND name LIKE $[qdes] OR type=${type} AND description LIKE $[qdes]' 
+    return db.any(sql, {type, qdes})
+    }
 //Update a product
-productServices.update=(seller_id,description, duration,location, type, name, price, images)=>{
-    return db.any('UPDATE products SET description=${description} , duration=${duration}, location=${location}, type=${type}, name=${name}, price=${price},  images=${images}', {description, duration,location, type, name, price, images})
+productServices.update=(product_id,description, duration,location, type, name, price, image)=>{
+    return db.any('UPDATE product SET description=${description} , duration=${duration}, location=${location}, type=${type}, name=${name}, price=${price},  images=${image} WHERE id=${product_id}', {product_id,description, duration,location, type, name, price, image})
     }
 
 //Delete a product
 productServices.delete=(id)=>{
-    return db.any('DELETE FROM products WHERE id=${id}', {id})
+    return db.none('DELETE FROM product WHERE id=${id}', {id})
     }
 
 
